@@ -61,9 +61,6 @@ This resource is based on the FreeBSD Service resource included with Chef and
 is compatible with OpenBSD 5.x which uses the `rc.d` method for service script
 management.
 
-OpenBSD's `rc.d` includes a few differences from FreeBSD that this resource
-handles for you.
-
 Enabled services are added to the `/etc/rc.conf.local` file so that
 `/etc/rc.conf` is left untouched, simplifying openbsd upgrades.
 
@@ -72,10 +69,16 @@ on the `parameters` hash.
 
 ### Usage
 
+    # adds to /etc/rc.conf.local:
+    # ntpd_flags="-s"
+
     service "ntpd" do
       parameters({:flags => "-s"})
       action [:enable, :start]
     end
+
+    # adds to /etc/rc.conf.local:
+    # ftpproxy_flags=""
 
     service "ftpproxy" do
       action [:enable, :start]
